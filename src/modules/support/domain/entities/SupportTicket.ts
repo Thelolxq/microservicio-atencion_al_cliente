@@ -1,9 +1,8 @@
 // src/modules/support/domain/entities/SupportTicket.ts
-import { v4 as uuidv4 } from 'uuid';
 import { SupportTicketId } from '../valueobjects/SupportTicketId';
-import { UserId } from '../valueobjects/UserId';
 import { MessageContent } from '../valueobjects/MessageContent';
 import { Message } from './Message';
+import { UserId } from '../valueobjects/UserId'; 
 
 export type TicketStatus = 'abierto' | 'en-progreso' | 'resuelto' | 'cerrado';
 
@@ -17,7 +16,7 @@ export class SupportTicket {
   public updatedAt: Date;
 
   constructor(userId: UserId, incidentDescription: string) {
-    this.id = uuidv4();
+    this.id = new SupportTicketId(); 
     this.userId = userId;
     this.incidentDescription = incidentDescription;
     this.status = 'abierto';

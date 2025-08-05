@@ -5,7 +5,15 @@ import { SupportTicketId } from "../../domain/valueobjects/SupportTicketId";
 export class GetSupportTicketById {
   constructor(private readonly repository: SupportTicketRepository) {}
 
-  async execute(id: SupportTicketId): Promise<SupportTicket | null> {
-    return this.repository.findById(id);
+   async execute(id: string): Promise<SupportTicket | null> {
+    try {
+      const ticketIdVO = new SupportTicketId(id);
+      
+      return this.repository.findById(ticketIdVO);
+
+    } catch (error) {
+      console.error(`Error al buscar ticket por ID: ${(error as Error).message}`);
+      throw error;
+    }
   }
 }
